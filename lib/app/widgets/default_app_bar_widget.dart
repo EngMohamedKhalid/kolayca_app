@@ -66,9 +66,9 @@ class DefaultAppBarWidget extends StatelessWidget
               ):0.horizontalSpace,
       title: titleWidget?? TextWidget(
         title: title??"",
-        fontFamily: "PTSerif",
-        titleFontWeight: FontWeight.w400,
-        titleSize: 19.sp,
+        fontFamily: "Aljazeera",
+        titleFontWeight: FontWeight.bold,
+        titleSize: 36.sp,
           titleColor:titleColor ??AppColors.mainColor
       ),
       actions: actions

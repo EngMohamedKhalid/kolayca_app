@@ -16,6 +16,7 @@ import 'app/utils/language_manager.dart';
 import 'app/utils/navigation_helper.dart';
 import 'app/widgets/carousel_widget/carousel_cubit/carousel_cubit.dart';
 import 'features/auth_feature/presentation/presentation_logic_holder/auth_cubit.dart';
+import 'features/home_feature/presentation/screens/recorded_lesson_screen.dart';
 import 'features/intro_feature/screens/splash_screen.dart';
 
 void main() async{
@@ -79,9 +80,7 @@ class MyApp extends StatelessWidget {
                     // locale: CookieManagerService.getLocale,
                     locale: context.locale,
                     title: 'Kolayca App',
-                    theme: Themes.light,
-                    darkTheme: Themes.dark,
-                    themeMode: getIt<CacheService>().getThemeMode(),
+                    theme: kolaycaTheme(),
                     debugShowCheckedModeBanner: false,
                     navigatorKey: getIt<NavHelper>().navigatorKey,
                     //
@@ -95,7 +94,7 @@ class MyApp extends StatelessWidget {
                         );
                       },
                     ),
-                    home: const HomeScreen()
+                    home: const RecordedLessonScreen()
                 );
               }
           ),

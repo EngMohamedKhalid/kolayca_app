@@ -30,7 +30,7 @@ class TextWidget extends StatelessWidget {
       style: TextStyle(
         decoration: textDecoration??TextDecoration.none,
         color: titleColor ?? AppColors.field,
-        fontFamily: fontFamily,
+        fontFamily: fontFamily??"Aljazeera",
         fontSize: titleSize??15.sp,
         fontWeight: titleFontWeight ?? FontWeight.w500,
         decorationColor: AppColors.mainColor

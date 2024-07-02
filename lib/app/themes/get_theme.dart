@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../utils/app_colors.dart';
 import '../utils/app_fonts.dart';
 
-  ThemeData americanBoardTheme() {
+  ThemeData kolaycaTheme() {
   return ThemeData(
     /// main colors of the app
     //   primaryColor: ColorManager.primary,
@@ -13,7 +13,7 @@ import '../utils/app_fonts.dart';
     //   primaryColorDark: ColorManager.success,
     //   disabledColor: ColorManager.lightColor,
     scaffoldBackgroundColor: AppColors.white,
-    fontFamily: "PTSerif",
+    fontFamily: "Aljazeera",
     bottomNavigationBarTheme:const BottomNavigationBarThemeData(
       backgroundColor: AppColors.black,
 
