@@ -63,7 +63,6 @@ dependencies:
   flutter_widget_from_html: ^0.14.11
   video_player: ^2.7.2
   youtube_player_flutter: ^9.0.0
-  flutter_inappwebview: ^6.0.0
   country_code_picker: ^3.0.0
   #  modal_bottom_sheet: ^2.1.2
   country_flags: ^2.2.0

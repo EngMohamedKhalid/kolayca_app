@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kolayca_app/features/auth_feature/presentation/screens/login_screen.dart';
+import 'package:kolayca_app/features/home_feature/presentation/screens/about_us_screen.dart';
 import 'package:kolayca_app/features/home_feature/presentation/screens/home_screen.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'app/services/cache_service.dart';
@@ -94,7 +95,7 @@ class MyApp extends StatelessWidget {
                         );
                       },
                     ),
-                    home: const RecordedLessonScreen()
+                    home: const AboutUsScreen()
                 );
               }
           ),

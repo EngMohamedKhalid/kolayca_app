@@ -22,29 +22,28 @@ class RecordedLessonScreen extends StatelessWidget {
       body: Column(
         children: [
           ImageWidget(
-            imageUrl: "assets/images/home.png",
+            imageUrl: "assets/images/lesson.png",
             width: double.infinity,
             height: 300.h,
             fit: BoxFit.fill,
           ),
           16.verticalSpace,
-          YouTubeVidePlayerWidget(
-            "https://www.youtube.com/watch?v=6g4O5UOH304"
+
+          Expanded(
+            child: GridView.builder(
+                itemCount: 20,
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 8,
+                  mainAxisSpacing: 8,
+                  childAspectRatio: 1
+                ),
+                itemBuilder: (context, index) {
+                  return const VideoPlayerWidget();
+                }
+            ),
           )
-          // Expanded(
-          //   child: GridView.builder(
-          //       itemCount: 20,
-          //       padding: EdgeInsets.symmetric(horizontal: 16.w),
-          //       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          //         crossAxisCount: 2,
-          //         crossAxisSpacing: 8,
-          //         mainAxisSpacing: 8,
-          //       ),
-          //       itemBuilder: (context, index) {
-          //         return const VideoPlayerWidget();
-          //       }
-          //   ),
-          // )
         ],
       ),
     );

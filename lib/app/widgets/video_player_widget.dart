@@ -1,28 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-class YouTubeVidePlayerWidget extends StatefulWidget {
-  final String url;
- const YouTubeVidePlayerWidget(this.url,{super.key});
 
+class VideoPlayerWidget extends StatefulWidget {
+  const VideoPlayerWidget({super.key,  this.url});
+  final String? url;
   @override
-  State<YouTubeVidePlayerWidget> createState() => _YouTubeVidePlayerState();
+  State<VideoPlayerWidget> createState() => _VideoPlayerWidgetState();
 }
 
-class _YouTubeVidePlayerState extends State<YouTubeVidePlayerWidget> {
+class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   late YoutubePlayerController _controller;
   @override
-  void initState(){
+  void initState() {
     super.initState();
     _controller = YoutubePlayerController(
-      initialVideoId: YoutubePlayer.convertUrlToId(widget.url)??"",
-      flags: const YoutubePlayerFlags(
-        autoPlay: true,
-        mute: false,
-        hideThumbnail: true,
-        enableCaption: true,
-      ),
-    );
+        initialVideoId: YoutubePlayer.convertUrlToId(widget.url??"https://youtu.be/k-59Uyp0Ojc?feature=shared")??"iLnmTe5Q2Qw",
+        flags:const  YoutubePlayerFlags(
+            mute: false,
+            autoPlay: false,
+            showLiveFullscreenButton: true,
+            loop: false,
+            isLive: false,
+            forceHD: true,
+            hideThumbnail: true
+        ));
+
   }
   @override
   void dispose() {
@@ -31,23 +34,52 @@ class _YouTubeVidePlayerState extends State<YouTubeVidePlayerWidget> {
   }
   @override
   Widget build(BuildContext context) {
-    return YoutubePlayerBuilder(
+    return  ClipRRect(
+      borderRadius: BorderRadius.circular(16),
+      child: YoutubePlayerBuilder(
+        onExitFullScreen: () {
+          SystemChrome.setPreferredOrientations(DeviceOrientation.values);
+        },
         player: YoutubePlayer(
+          width: double.infinity,
           controller: _controller,
-          onReady: (){
-           // setState((){});
+          showVideoProgressIndicator: true,
+          progressIndicatorColor: Colors.blueAccent,
+          topActions: <Widget>[
+            const SizedBox(width: 8.0),
+            Expanded(
+              child: Text(
+                _controller.metadata.title,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 18.0,
+                ),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+              ),
+            ),
+
+            IconButton(
+              icon: const Icon(
+                Icons.arrow_forward_outlined,
+                color: Colors.white,
+                size: 25.0,
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+          onReady: () {
+            //   _isPlayerReady = true;
+          },
+          onEnded: (data) {
+            Navigator.pop(context);
+            //  _showSnackBar('Next Video Started!');
           },
         ),
-        // onExitFullScreen: ()=>goBack(),
-        builder: (context, player) {
-          return Column(
-            children: [
-              // some widgets
-              player,
-              //some other widgets
-            ],
-          );
-        });
-
+        builder: (contxt, plear) => plear,
+      ),
+    );
   }
 }
