@@ -1,0 +1,12 @@
+{
+  "name":"الاسم",
+  "password":"كلمة السر",
+  "login":"الدخول",
+  "FieldMustNotBeEmpty":"يجب عليك تعبئة هذا الحقل",
+  "noAccount":"اذا لم يكن لديك حساب",
+  "registerNewAccount":"تسجيل حساب جديد",
+  "newAccount":"حساب جديد",
+  "email":"الايميل",
+  "registerNewAccount":"تسجيل حساب جديد"
+
+}
