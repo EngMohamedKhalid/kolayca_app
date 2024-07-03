@@ -92,6 +92,7 @@ flutter:
     - assets/
     - assets/images/
     - assets/fonts/
+    - assets/icons/
     - assets/translations/
   fonts:
     - family: Aljazeera

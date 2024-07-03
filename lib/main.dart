@@ -17,8 +17,11 @@ import 'app/utils/language_manager.dart';
 import 'app/utils/navigation_helper.dart';
 import 'app/widgets/carousel_widget/carousel_cubit/carousel_cubit.dart';
 import 'features/auth_feature/presentation/presentation_logic_holder/auth_cubit.dart';
+import 'features/home_feature/presentation/screens/ask_for_translator_screen.dart';
+import 'features/home_feature/presentation/screens/live_translator_screen.dart';
 import 'features/home_feature/presentation/screens/recorded_lesson_screen.dart';
 import 'features/intro_feature/screens/splash_screen.dart';
+import 'features/profile_feature/presentation/screens/profile_screen.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -95,7 +98,7 @@ class MyApp extends StatelessWidget {
                         );
                       },
                     ),
-                    home: const AboutUsScreen()
+                    home: const ProfileScreen()
                 );
               }
           ),

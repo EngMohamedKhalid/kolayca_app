@@ -74,7 +74,8 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
             //   _isPlayerReady = true;
           },
           onEnded: (data) {
-            Navigator.pop(context);
+            //todo:Handle end of video
+            //Navigator.pop(context);
             //  _showSnackBar('Next Video Started!');
           },
         ),
