@@ -5,8 +5,10 @@ import '../../../../app/services/cache_service.dart';
 import '../../../../app/utils/app_assets.dart';
 import '../../../../app/utils/app_colors.dart';
 import '../../../../app/utils/get_it_injection.dart';
+import '../../../../app/utils/helper.dart';
 import '../../../../app/widgets/image_widget.dart';
 import '../../../../app/widgets/text_widget.dart';
+import '../screens/edit_profile_screen.dart';
 
 class CustomLoginAndVerifiedWidget extends StatelessWidget {
   const CustomLoginAndVerifiedWidget({super.key});
@@ -67,7 +69,7 @@ class CustomLoginAndVerifiedWidget extends StatelessWidget {
         const Spacer(),
         InkWell(
           onTap: () {
-            //navigateTo(const EditProfileScreen());
+            navigateTo(const EditProfileScreen());
           },
           child: ImageWidget(
             imageUrl:AppAssets.edit ,

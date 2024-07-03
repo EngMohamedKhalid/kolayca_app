@@ -1,9 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kolayca_app/app/utils/helper.dart';
 import 'package:kolayca_app/app/widgets/default_app_bar_widget.dart';
 import 'package:kolayca_app/app/widgets/image_widget.dart';
 import 'package:kolayca_app/app/widgets/text_widget.dart';
+import 'package:kolayca_app/features/home_feature/presentation/screens/video_player_screen.dart';
 import 'package:kolayca_app/features/home_feature/presentation/widgets/custom_home_item.dart';
 
 import '../../../../app/utils/app_colors.dart';

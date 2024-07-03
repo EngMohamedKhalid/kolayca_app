@@ -6,6 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kolayca_app/features/auth_feature/presentation/screens/login_screen.dart';
 import 'package:kolayca_app/features/home_feature/presentation/screens/about_us_screen.dart';
 import 'package:kolayca_app/features/home_feature/presentation/screens/home_screen.dart';
+import 'package:kolayca_app/features/profile_feature/presentation/presentation_logic_holder/profile_cubit.dart';
+import 'package:kolayca_app/features/profile_feature/presentation/screens/notification_screen.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'app/services/cache_service.dart';
 import 'app/themes/get_theme.dart';
@@ -40,6 +42,9 @@ void main() async{
         ),
         BlocProvider<ThemeCubit>(
           create: (BuildContext context) => ThemeCubit(),
+        ),
+        BlocProvider<ProfileCubit>(
+          create: (BuildContext context) => ProfileCubit(),
         ),
       ],
       child: const MyApp(),

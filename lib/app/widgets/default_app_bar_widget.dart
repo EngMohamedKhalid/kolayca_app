@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -59,9 +60,9 @@ class DefaultAppBarWidget extends StatelessWidget
                     Navigator.pop(context);
                   },
               icon: Icon(
-                Icons.arrow_circle_right_outlined,
+                context.locale.languageCode=="en"?Icons.arrow_circle_left_outlined :Icons.arrow_circle_right_outlined,
                 color:leadingColor??AppColors.mainColor,
-                size: 25.sp,
+                size: 40.sp,
               ),
               ):0.horizontalSpace,
       title: titleWidget?? TextWidget(

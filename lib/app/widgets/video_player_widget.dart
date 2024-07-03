@@ -23,6 +23,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
             loop: false,
             isLive: false,
             forceHD: true,
+
             hideThumbnail: true
         ));
 
