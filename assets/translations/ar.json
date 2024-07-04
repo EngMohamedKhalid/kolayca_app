@@ -19,6 +19,7 @@
   "TheConfirmationError":"حقل التأكيد لا يتطابق مع حقل كلمة المرور\n",
   "location":"حدّد موقعك من الخريطة",
   "askForTranslator":"اطلب اقرب مترجم",
+  "subscribe":"باقات الاشتراك",
   "liveTranslator":"اطلب مترجم مباشر",
   "wayLiveTranslator":"طريقة طلب مترجم مباشر",
   "askForTranslatorBody":"اطلب أقرب مترجم من موقعك ليقدم\nلك خدمة الترجمة بشكل مباشر",

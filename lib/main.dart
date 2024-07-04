@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kolayca_app/features/BNB_feature/presentation/screens/BNB_screen.dart';
 import 'package:kolayca_app/features/auth_feature/presentation/screens/login_screen.dart';
 import 'package:kolayca_app/features/home_feature/presentation/screens/about_us_screen.dart';
 import 'package:kolayca_app/features/home_feature/presentation/screens/home_screen.dart';
+import 'package:kolayca_app/features/home_feature/presentation/screens/subscribe_package_screen.dart';
 import 'package:kolayca_app/features/profile_feature/presentation/presentation_logic_holder/profile_cubit.dart';
 import 'package:kolayca_app/features/profile_feature/presentation/screens/notification_screen.dart';
 import 'package:overlay_support/overlay_support.dart';
@@ -103,7 +105,7 @@ class MyApp extends StatelessWidget {
                         );
                       },
                     ),
-                    home: const ProfileScreen()
+                    home: const BnbScreen()
                 );
               }
           ),
