@@ -7,6 +7,7 @@ import 'package:kolayca_app/features/BNB_feature/presentation/screens/BNB_screen
 import 'package:kolayca_app/features/auth_feature/presentation/screens/login_screen.dart';
 import 'package:kolayca_app/features/home_feature/presentation/screens/about_us_screen.dart';
 import 'package:kolayca_app/features/home_feature/presentation/screens/home_screen.dart';
+import 'package:kolayca_app/features/home_feature/presentation/screens/request_live_translator_screen.dart';
 import 'package:kolayca_app/features/home_feature/presentation/screens/subscribe_package_screen.dart';
 import 'package:kolayca_app/features/profile_feature/presentation/presentation_logic_holder/profile_cubit.dart';
 import 'package:kolayca_app/features/profile_feature/presentation/screens/notification_screen.dart';
@@ -20,6 +21,7 @@ import 'app/utils/get_it_injection.dart';
 import 'app/utils/language_manager.dart';
 import 'app/utils/navigation_helper.dart';
 import 'app/widgets/carousel_widget/carousel_cubit/carousel_cubit.dart';
+import 'features/BNB_feature/presentation/presentation_logic_holder/bottom_navigation_cubit.dart';
 import 'features/auth_feature/presentation/presentation_logic_holder/auth_cubit.dart';
 import 'features/home_feature/presentation/screens/ask_for_translator_screen.dart';
 import 'features/home_feature/presentation/screens/live_translator_screen.dart';
@@ -44,6 +46,9 @@ void main() async{
         ),
         BlocProvider<ThemeCubit>(
           create: (BuildContext context) => ThemeCubit(),
+        ),
+        BlocProvider<BottomNavigationCubit>(
+          create: (BuildContext context) => BottomNavigationCubit(),
         ),
         BlocProvider<ProfileCubit>(
           create: (BuildContext context) => ProfileCubit(),
@@ -105,7 +110,7 @@ class MyApp extends StatelessWidget {
                         );
                       },
                     ),
-                    home: const BnbScreen()
+                    home: const LoginScreen()
                 );
               }
           ),

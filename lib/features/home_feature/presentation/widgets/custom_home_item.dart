@@ -40,7 +40,7 @@ class CustomHomeItem extends StatelessWidget {
             title: name??"تحدث مع الاتراك",
             titleSize: 20.sp,
             titleColor: AppColors.white,
-            titleFontWeight: FontWeight.bold,
+            titleFontWeight: FontWeight.w500,
           ),
         ],
       ),

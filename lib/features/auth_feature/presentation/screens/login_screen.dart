@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kolayca_app/app/utils/helper.dart';
 import 'package:kolayca_app/app/widgets/default_app_bar_widget.dart';
+import 'package:kolayca_app/features/BNB_feature/presentation/screens/BNB_screen.dart';
 import 'package:kolayca_app/features/auth_feature/presentation/screens/register_screen.dart';
 import '../../../../../app/utils/app_assets.dart';
 import '../../../../../app/utils/app_colors.dart';
@@ -43,7 +44,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 key: formKey,
                 child: Column(
                   children: [
-                    DefaultAppBarWidget(),
+                    DefaultAppBarWidget(
+                      canBack: false,
+                    ),
                     Expanded(
                       child: ListView(
                         padding: EdgeInsets.symmetric(horizontal: 21.sp,),
@@ -101,9 +104,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           ButtonWidget(
                             loading: state is LoadingState,
                             onPressed: () {
-                              if(formKey.currentState!.validate()){
-                                cu.login();
-                              }
+                              navigateTo(BnbScreen(),removeAll: true);
+                              // if(formKey.currentState!.validate()){
+                              //   cu.login();
+                              // }
                             },
                             text: "login".tr(),
                             horizontalMargin: 60.w,

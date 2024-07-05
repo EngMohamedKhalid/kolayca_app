@@ -10,6 +10,8 @@ import '../../../../../app/widgets/custom_form_field.dart';
 import '../../../../../app/widgets/image_widget.dart';
 import '../../../../../app/widgets/text_button_widget.dart';
 import '../../../../../app/widgets/text_widget.dart';
+import '../../../../app/utils/helper.dart';
+import '../../../BNB_feature/presentation/screens/BNB_screen.dart';
 import '../presentation_logic_holder/auth_cubit.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -41,7 +43,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
               key: formKey,
               child: Column(
                 children: [
-                  DefaultAppBarWidget(),
+                  DefaultAppBarWidget(
+                    canBack: false,
+                  ),
                   Expanded(
                     child: ListView(
                       padding: EdgeInsets.symmetric(horizontal: 21.sp,),
@@ -150,9 +154,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         25.verticalSpace,
                        InkWell(
                          onTap: (){
-                           if(formKey.currentState!.validate()){
-                             //todo implement register
-                           }
+                           navigateTo(BnbScreen(),removeAll: true);
+                           // if(formKey.currentState!.validate()){
+                           //   //todo implement register
+                           // }
                          },
                          child: ImageWidget(
                            imageUrl: "assets/images/arrow.png",

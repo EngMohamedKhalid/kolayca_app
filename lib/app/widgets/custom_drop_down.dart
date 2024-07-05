@@ -318,11 +318,11 @@ class _CustomDropDownState extends State<CustomDropDown> {
   Widget build(BuildContext context) {
     return Container(
       width: widget.width??double.infinity,
-      height:widget.height?? 60.h,
+      height:widget.height?? 65.h,
       padding: EdgeInsets.symmetric(vertical: 0.h),
       decoration: BoxDecoration(
         //border: Border.all(width: 1.5,color: AppColors.mainColor),
-        color:Color(0xffEDEDEB),
+        color:AppColors.mainColor,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Container(
@@ -333,9 +333,9 @@ class _CustomDropDownState extends State<CustomDropDown> {
             hint: Text(
               widget.dropDownHint,
               style: TextStyle(
-                fontSize: 18.sp,
-                fontWeight: FontWeight.w500,
-                color: AppColors.black,
+                fontSize: 28.sp,
+                fontWeight: FontWeight.w400,
+                color: AppColors.white,
               ),
             ),
             items: widget.items
@@ -347,7 +347,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
                   item??"",
                   maxLines: 100,
                   style: widget.dropDownHintTextStyle??TextStyle(
-                    fontSize: 16.sp,
+                    fontSize: 23.sp,
                     color: AppColors.black,
                   ),
                   overflow: TextOverflow.ellipsis,
@@ -366,7 +366,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
               width: 140,
             ),
             dropdownStyleData: DropdownStyleData(
-              maxHeight: 400,
+              maxHeight: 500,
               width: MediaQuery.of(context).size.width-42,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(14),
@@ -378,12 +378,12 @@ class _CustomDropDownState extends State<CustomDropDown> {
             ),
             iconStyleData: IconStyleData(
               icon: Icon(
-                Icons.arrow_drop_down,
-                size: 25.sp,
+                Icons.keyboard_arrow_down_rounded,
+                size: 38.sp,
               ),
               iconSize: 25.sp,
-              iconEnabledColor: Colors.black,
-              iconDisabledColor: Colors.black,
+              iconEnabledColor: Colors.white,
+              iconDisabledColor: Colors.white,
             ),
           ),
         ),

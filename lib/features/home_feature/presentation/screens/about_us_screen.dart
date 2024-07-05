@@ -19,6 +19,7 @@ class AboutUsScreen extends StatelessWidget {
       appBar: DefaultAppBarWidget(
         title: "aboutUs".tr(),
         centerTitle: true,
+        canBack: false,
       ),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 50.w),
