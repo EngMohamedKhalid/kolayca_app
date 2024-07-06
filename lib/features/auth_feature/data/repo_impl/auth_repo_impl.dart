@@ -15,19 +15,21 @@ class AuthRepoImpl extends AuthRepo{
   AuthRepoImpl({required this.authRemoteDataSource, required this.networkInfo});
 
   @override
-  Future<Either<Failure, UserModel>> login(Map<String,String> map)async {
-    return await RepoImplCallHandler<UserModel>(networkInfo)(() async {
+  Future<Either<Failure, AllUserModel>> login(Map<String,String> map)async {
+    return await RepoImplCallHandler<AllUserModel>(networkInfo)(() async {
       final result= await authRemoteDataSource.login(map);
-      await getIt<CacheService>().setUserToken(token: result.token??"null");
+       await getIt<CacheService>().setUserToken(token: result.accessToken??"null");
       await getIt<CacheService>().saveUserData(encodedUser: json.encode(result.toJson()));
       return  result;
     });
   }
 
   @override
-  Future<Either<Failure, String>> register(Map<String,String> map)async {
-    return await RepoImplCallHandler<String>(networkInfo)(() async {
+  Future<Either<Failure, AllUserModel>> register(Map<String,String> map)async {
+    return await RepoImplCallHandler<AllUserModel>(networkInfo)(() async {
       final result= await authRemoteDataSource.register(map);
+      await getIt<CacheService>().setUserToken(token: result.accessToken??"null");
+      await getIt<CacheService>().saveUserData(encodedUser: json.encode(result.toJson()));
       return  result;
     });
   }
@@ -54,13 +56,13 @@ class AuthRepoImpl extends AuthRepo{
       return  result;
     });
   }
-
-  @override
-  Future<Either<Failure, List<Specialization>>> getSpecialization() async {
-    return await RepoImplCallHandler<List<Specialization>>(networkInfo)(() async {
-      final result= await authRemoteDataSource.getSpecialization();
-      return  result;
-    });
-  }
+  //
+  // @override
+  // Future<Either<Failure, List<Specialization>>> getSpecialization() async {
+  //   return await RepoImplCallHandler<List<Specialization>>(networkInfo)(() async {
+  //     final result= await authRemoteDataSource.getSpecialization();
+  //     return  result;
+  //   });
+  // }
 
 }

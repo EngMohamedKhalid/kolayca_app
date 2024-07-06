@@ -25,7 +25,7 @@ class CustomLoginAndVerifiedWidget extends StatelessWidget {
             Row(
               children: [
                 TextWidget(
-                  title:getIt<CacheService>().getUserData()?.user?.name??"Eng Mohamed Khalid",
+                  title:"Eng Mohamed Khalid",
                   titleColor: AppColors.mainColor,
                   titleSize: 30.sp,
                   titleFontWeight: FontWeight.w600,
@@ -42,7 +42,7 @@ class CustomLoginAndVerifiedWidget extends StatelessWidget {
             Row(
               children: [
                 TextWidget(
-                  title:"${getIt<CacheService>().getUserData()?.user?.dialcode??"2"}${getIt<CacheService>().getUserData()?.user?.phone??"01016738840"}",
+                  title:"${getIt<CacheService>().getUserData()?.email??"2"}${"01016738840"}",
                   titleColor: AppColors.mainColor,
                   titleSize: 22.sp,
                   titleFontWeight: FontWeight.w500,

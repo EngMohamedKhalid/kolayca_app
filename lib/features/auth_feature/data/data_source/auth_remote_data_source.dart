@@ -8,13 +8,13 @@ import '../models/user_model.dart';
 
 
 abstract class AuthRemoteDataSource {
-  Future<UserModel> login(Map<String, String> map);
-  Future<String> register(Map<String, String> map);
+  Future<AllUserModel> login(Map<String, String> map);
+  Future<AllUserModel> register(Map<String, String> map);
   Future<String> verifyOtp(Map<String, String> map);
   Future<String> resendOtp(Map<String, String> map);
   Future<void> resetPassword(Map<String, String> map);
   // Future<DeleteModel> delete();
-  Future<List<Specialization>> getSpecialization();
+  // Future<List<Specialization>> getSpecialization();
 
 }
 
@@ -24,14 +24,14 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   AuthRemoteDataSourceImpl({required this.networkManager});
 
   @override
-  Future<UserModel> login(Map<String, dynamic> map) async {
+  Future<AllUserModel> login(Map<String, dynamic> map) async {
     final res = await networkManager.requestWithFormData(
       body: map,
       endPoint: kSignIn,
       method: RequestMethod.post
     );
     final data =  await RemoteDataSourceCallHandler().handleFormData(res);
-    return UserModel.fromJson(data.data);
+    return AllUserModel.fromJson(data.data);
   }
 
   @override
@@ -55,14 +55,14 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<String> register(Map<String, String> map)  async {
+  Future<AllUserModel> register(Map<String, String> map)  async {
     final res = await networkManager.requestWithFormData(
         body: map,
-        endPoint: "user/auth/register",
+        endPoint: "register",
         method: RequestMethod.post
     );
     final data =  await RemoteDataSourceCallHandler().handleFormData(res);
-    return data.msg??"";
+    return AllUserModel.fromJson(data.data);
   }
 
   @override
@@ -76,23 +76,23 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     return data.msg??"";
   }
 
-  @override
-  Future<List<Specialization>> getSpecialization()async {
-    final res = await networkManager.request(
-        endPoint: "general/specializations",
-        method: RequestMethod.get
-    );
-    final data =  await RemoteDataSourceCallHandler()(res);
-    List<Specialization> specializations=[];
-    if(data is List){
-      for (var item in data){
-        for (var x in item){
-         specializations.add(Specialization.fromJson(x));
-        }
-      }
-    }
-    return specializations;
-  }
+  // @override
+  // Future<List<Specialization>> getSpecialization()async {
+  //   final res = await networkManager.request(
+  //       endPoint: "general/specializations",
+  //       method: RequestMethod.get
+  //   );
+  //   final data =  await RemoteDataSourceCallHandler()(res);
+  //   List<Specialization> specializations=[];
+  //   if(data is List){
+  //     for (var item in data){
+  //       for (var x in item){
+  //        specializations.add(Specialization.fromJson(x));
+  //       }
+  //     }
+  //   }
+  //   return specializations;
+  // }
 
 
 }

@@ -3,6 +3,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kolayca_app/app/widgets/custom_alert_dialog.dart';
+import 'package:kolayca_app/features/BNB_feature/presentation/screens/BNB_screen.dart';
 import '../../../../app/services/cache_service.dart';
 import '../../../../app/utils/get_it_injection.dart';
 import '../../../../app/utils/hanlders/error_state_handler.dart';
@@ -26,37 +28,23 @@ class AuthCubit extends Cubit<AuthState> {
 
 
   final loginPasswordController = TextEditingController();
-  final loginEmailController = TextEditingController();
+  final loginNameController = TextEditingController();
+  //////////////////////////////////////////
   final otpEmailController = TextEditingController();
   final otpController = TextEditingController();
   final resetPassController = TextEditingController();
   final resetPassConfirmController = TextEditingController();
   /////////// REGISTER CONTROLLERS/////////////
-  final registerNameController = TextEditingController();
   final registerEmailController = TextEditingController();
-  final registerPhoneController = TextEditingController();
+  final registerNameController = TextEditingController();
   final registerPassController = TextEditingController();
   final registerPassConfirmController = TextEditingController();
-  String countryName= "Egypt";
-  String  dailCode = "20";
-  String  countryCode = "EG";
-  String ? specializationId;
+
   //////////////////////////////////
   bool passObscure = true;
   bool passConfObscure = true;
   String ? errorMsg;
-
-  List<Specialization>? specializations;
-  List<String> specializationsNames = [];
-
-  void changeData({required String dail,required String name,required String code}){
-    emit(LoadingState());
-    dailCode = dail;
-    countryCode = code;
-    countryName = name;
-    emit(AuthInitial());
-  }
-
+  AllUserModel ? userModel;
   void changeVisible(){
     emit(LoadingState());
     passObscure = !passObscure;
@@ -73,23 +61,40 @@ class AuthCubit extends Cubit<AuthState> {
     errorMsg=null;
     emit(LoadingState());
     final response = await getIt<LoginUseCase>()(LoginUSeCaseParams(
-      email: loginEmailController.text,
+      name: loginNameController.text,
       password: loginPasswordController.text,
-      platform:Platform.isAndroid? "android" : "ios"
     ));
     response.fold(
       (l){
-        errorMsg = l.cause.toString();
-        print(errorMsg);
-        print("========================");
+       errorStateHandler(l);
       },
           (r) {
-      print(r.token??"token");
-      print(r.user?.email??"email");
-        // navigateTo(const BNBScreen(), removeAll: true);
-      //loginEmailController.clear();
-      loginPasswordController.clear();
-      errorMsg=null;
+        userModel = r;
+        print(userModel?.accessToken??"null");
+        navigateTo(BnbScreen(),removeAll: true);
+        showToast(msg: "تم تسجيل الدخول بنجاح".tr());
+      },
+    );
+    emit(AuthInitial());
+  }
+
+  void register() async {
+    emit(LoadingState());
+    final response = await getIt<RegisterUseCase>()(RegisterUSeCaseParams(
+      name: registerNameController.text,
+      password: registerPassController.text,
+      passwordConfirmation:registerPassController.text ,
+      email:registerEmailController.text,
+    ));
+    response.fold(
+      (l){
+        globalAlertDialogue("البريد الالكتروني موجود مسبقا لدينا ",);
+      },
+          (r) {
+        userModel = r;
+        print(userModel?.accessToken??"null");
+        navigateTo(BnbScreen(),removeAll: true);
+        showToast(msg: "تم انشاء الحساب بنجاح".tr());
       },
     );
     emit(AuthInitial());

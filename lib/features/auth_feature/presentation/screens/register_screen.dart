@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kolayca_app/app/widgets/default_app_bar_widget.dart';
+import 'package:kolayca_app/app/widgets/loading.dart';
 import '../../../../../app/utils/app_assets.dart';
 import '../../../../../app/utils/app_colors.dart';
 import '../../../../../app/widgets/button_widget.dart';
@@ -41,13 +42,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
             var cu = AuthCubit.get();
             return Form(
               key: formKey,
-              child: Column(
-                children: [
-                  DefaultAppBarWidget(
-                    canBack: false,
-                  ),
-                  Expanded(
-                    child: ListView(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    DefaultAppBarWidget(
+                      canBack: false,
+                    ),
+                    ListView(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
                       padding: EdgeInsets.symmetric(horizontal: 21.sp,),
                       children: [
                         Container(
@@ -86,8 +89,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           alignment: Alignment.center,
                           child: CustomFormField(
                             hint: "name".tr(),
-                            controller: cu.loginEmailController,
-                            keyboardType: TextInputType.emailAddress,
+                            controller: cu.registerNameController,
                           ),
                         ),
                         16.verticalSpace,
@@ -95,7 +97,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           alignment: Alignment.center,
                           child: CustomFormField(
                             hint: "email".tr(),
-                            controller: cu.loginEmailController,
+                             controller: cu.registerEmailController,
                             keyboardType: TextInputType.emailAddress,
                           ),
                         ),
@@ -104,7 +106,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           alignment: Alignment.center,
                           child: CustomFormField(
                             hint: "password".tr(),
-                            controller: cu.loginPasswordController,
+                            controller: cu.registerPassController,
                             suffixIcon: Icons.done,
                             // suffixIcon: cu.passObscure==false?Icons.visibility:Icons.visibility_off,
                             obscure:cu.passObscure,
@@ -123,7 +125,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           alignment: Alignment.center,
                           child: CustomFormField(
                             hint: "password".tr(),
-                            controller: cu.loginPasswordController,
+                            controller: cu.registerPassConfirmController,
                             suffixIcon: Icons.done,
                             // suffixIcon: cu.passObscure==false?Icons.visibility:Icons.visibility_off,
                             obscure:cu.passObscure,
@@ -152,12 +154,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         //   ],
                         // ),
                         25.verticalSpace,
+                       state is LoadingState?
+                       const Center(child: Loading())
+                           :
                        InkWell(
                          onTap: (){
-                           navigateTo(BnbScreen(),removeAll: true);
-                           // if(formKey.currentState!.validate()){
-                           //   //todo implement register
-                           // }
+                           if(formKey.currentState!.validate()){
+                             cu.register();
+                           }
                          },
                          child: ImageWidget(
                            imageUrl: "assets/images/arrow.png",
@@ -167,8 +171,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         16.verticalSpace,
                       ],
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             );
           },

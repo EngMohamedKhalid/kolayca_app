@@ -44,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 key: formKey,
                 child: Column(
                   children: [
-                    DefaultAppBarWidget(
+                    const DefaultAppBarWidget(
                       canBack: false,
                     ),
                     Expanded(
@@ -62,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             alignment: Alignment.center,
                             child: CustomFormField(
                               hint: "name".tr(),
-                              controller: cu.loginEmailController,
+                              controller: cu.loginNameController,
                               keyboardType: TextInputType.emailAddress,
                               prefixIcon: Icons.person_outline_sharp,
                             ),
@@ -86,28 +86,13 @@ class _LoginScreenState extends State<LoginScreen> {
                               // },
                             ),
                           ),
-                          // Row(
-                          //   mainAxisAlignment: MainAxisAlignment.end,
-                          //   children: [
-                          //     CustomTextButton(
-                          //       onPressed: () {
-                          //         // navigateTo( const ForgetPasswordScreen());
-                          //       },
-                          //       title: "forgetPass".tr(),
-                          //       titleColor: AppColors.mainColor,
-                          //       titleFontWeight: FontWeight.w400,
-                          //       titleSize: 14.sp,
-                          //     ),
-                          //   ],
-                          // ),
                           25.verticalSpace,
                           ButtonWidget(
                             loading: state is LoadingState,
                             onPressed: () {
-                              navigateTo(BnbScreen(),removeAll: true);
-                              // if(formKey.currentState!.validate()){
-                              //   cu.login();
-                              // }
+                              if(formKey.currentState!.validate()){
+                                cu.login();
+                              }
                             },
                             text: "login".tr(),
                             horizontalMargin: 60.w,

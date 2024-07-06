@@ -2,11 +2,11 @@
 
 import 'package:url_launcher/url_launcher.dart';
 
-const String kBaseUrl = "app.american-board.us";
-const String kBaseVersion = 'api/v1/';
+const String kBaseUrl = "alooturkey.com";
+const String kBaseVersion = 'api/';
 
 // end points
-const String kSignIn = 'user/auth/login';
+const String kSignIn = 'login';
 const String kDelete = 'user/profile/delete';
 const String kFetchUser = 'user/profile/fetch';
 const String kGetCourses = 'courses/fetch';

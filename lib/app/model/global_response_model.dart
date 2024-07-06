@@ -21,9 +21,9 @@ class GlobalResponseModel {
     success = json['status'];
     key = json['code'];
     authError = false;
-    data = json['pagination']!=null?{
+    data = json['access_token']!=null?{
       "data":json['data'],
-      "pagination":json['pagination']
+      "access_token":json['access_token']
     }:json['data'];
     msg = json['message'];
     // errors = json['msg'] != null ? json['Errors'].cast<String>() : [];

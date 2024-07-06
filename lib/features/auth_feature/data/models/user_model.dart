@@ -1,114 +1,53 @@
 class UserModel {
   UserModel({
-      this.user, 
-      this.token,});
+      this.id, 
+      this.name, 
+      this.mobile, 
+      this.email, 
+      this.image, 
+      this.role,});
 
   UserModel.fromJson(dynamic json) {
-    user = json['user'] != null ? User.fromJson(json['user']) : null;
-    token = json['token'];
-  }
-  User? user;
-  String? token;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    if (user != null) {
-      map['user'] = user?.toJson();
-    }
-    map['token'] = token;
-    return map;
-  }
-
-}
-
-class User {
-  User({
-      this.id, 
-      this.name, 
-      this.email, 
-      this.phone, 
-      this.dialcode, 
-      this.countryName, 
-      this.countryCode, 
-      this.blocked, 
-      this.emailVerified, 
-      this.specialization, 
-      this.image, 
-      this.lastLoggedInAt, 
-      this.createdAt,});
-
-  User.fromJson(dynamic json) {
     id = json['id'];
     name = json['name'];
+    mobile = json['mobile'];
     email = json['email'];
-    phone = json['phone'];
-    dialcode = json['dialcode'];
-    countryName = json['country_name'];
-    countryCode = json['country_code'];
-    blocked = json['blocked'];
-    emailVerified = json['email_verified'];
-    specialization = json['specialization'] != null ? Specialization.fromJson(json['specialization']) : null;
     image = json['image'];
-    lastLoggedInAt = json['last_logged_in_at'];
-    createdAt = json['created_at'];
+    role = json['role'];
   }
   num? id;
   String? name;
+  dynamic mobile;
   String? email;
-  String? phone;
-  String? dialcode;
-  String? countryName;
-  String? countryCode;
-  bool? blocked;
-  bool? emailVerified;
-  Specialization? specialization;
-  dynamic image;
-  String? lastLoggedInAt;
-  String? createdAt;
+  String? image;
+  String? role;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = id;
     map['name'] = name;
+    map['mobile'] = mobile;
     map['email'] = email;
-    map['phone'] = phone;
-    map['dialcode'] = dialcode;
-    map['country_name'] = countryName;
-    map['country_code'] = countryCode;
-    map['blocked'] = blocked;
-    map['email_verified'] = emailVerified;
-    if (specialization != null) {
-      map['specialization'] = specialization?.toJson();
-    }
     map['image'] = image;
-    map['last_logged_in_at'] = lastLoggedInAt;
-    map['created_at'] = createdAt;
+    map['role'] = role;
     return map;
   }
 
 }
 
-class Specialization {
-  Specialization({
-      this.id, 
-      this.name, 
-      this.createdAt,});
+class AllUserModel{
+  UserModel ? user;
+  String ? accessToken;
 
-  Specialization.fromJson(dynamic json) {
-    id = json['id'];
-    name = json['name'];
-    createdAt = json['created_at'];
+  AllUserModel.fromJson(dynamic json) {
+    user = UserModel.fromJson(json['data']);
+    accessToken = json['access_token'];
   }
-  num? id;
-  String? name;
-  String? createdAt;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['id'] = id;
-    map['name'] = name;
-    map['created_at'] = createdAt;
+    map['data'] = user?.toJson();
+    map['access_token'] = accessToken;
     return map;
   }
-
 }
