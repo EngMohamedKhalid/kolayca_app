@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kolayca_app/app/utils/app_colors.dart';
 import 'package:kolayca_app/app/widgets/text_widget.dart';
 import 'package:kolayca_app/features/BNB_feature/presentation/presentation_logic_holder/bottom_navigation_state.dart';
+import 'package:kolayca_app/features/auth_feature/presentation/presentation_logic_holder/auth_cubit.dart';
 
 import '../presentation_logic_holder/bottom_navigation_cubit.dart';
 
@@ -15,6 +16,11 @@ class BnbScreen extends StatefulWidget {
 }
 
 class _BnbScreenState extends State<BnbScreen> {
+  @override
+  void initState() {
+    super.initState();
+    AuthCubit.get().getProfile();
+  }
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BottomNavigationCubit, BottomNavigationStats>(

@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 
 
@@ -10,6 +11,8 @@ import '../models/user_model.dart';
 abstract class AuthRemoteDataSource {
   Future<AllUserModel> login(Map<String, String> map);
   Future<AllUserModel> register(Map<String, String> map);
+  Future<UserModel> getProfile();
+  Future<AllUserModel> updateProfile(Map<String, String> map,Map<String, File>? files);
   Future<String> verifyOtp(Map<String, String> map);
   Future<String> resendOtp(Map<String, String> map);
   Future<void> resetPassword(Map<String, String> map);
@@ -74,6 +77,37 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     );
     final data =  await RemoteDataSourceCallHandler().handleFormData(res);
     return data.msg??"";
+  }
+
+  @override
+  Future<UserModel> getProfile() async {
+    final res = await networkManager.requestWithFormData(
+        endPoint: "profile",
+        method: RequestMethod.post
+    );
+    final data =  await RemoteDataSourceCallHandler().handleFormData(res);
+    return UserModel.fromJson(data.data);
+  }
+
+  @override
+  Future<AllUserModel> updateProfile(Map<String, String> map, Map<String, File>? files) async {
+    var response;
+    if(files?["image"]!=null){
+      response = await networkManager.requestWithFile(
+        endPoint: "update_profile",
+        body: map,
+        files: files,
+      );
+    }else{
+      response = await networkManager.requestWithFormData(
+        endPoint: "update_profile",
+        method: RequestMethod.post,
+        body: map,
+      );
+    }
+
+    final data =  await RemoteDataSourceCallHandler().handleFormData(response);
+    return AllUserModel.fromJson(data.data);
   }
 
   // @override

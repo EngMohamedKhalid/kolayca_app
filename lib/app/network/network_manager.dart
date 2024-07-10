@@ -79,10 +79,10 @@ class NetworkManager {
     if(headers!=null){
       requestHeaders.addAll(headers);
     }
-    // requestHeaders.addAll({
-    //   "Authorization":getIt<CacheService>().getUserToken()??"",
-    //   "lang":getIt<NavHelper>().navigatorKey.currentState?.context.locale.languageCode??"en"
-    // });
+    requestHeaders.addAll({
+      "Authorization":getIt<CacheService>().getUserToken()??"",
+      "lang":getIt<NavHelper>().navigatorKey.currentState?.context.locale.languageCode??"en"
+    });
     var request = http.Request(method?.name.toUpperCase()??'POST', _uri!);
     request.body = json.encode(body);
     request.headers.addAll(requestHeaders);

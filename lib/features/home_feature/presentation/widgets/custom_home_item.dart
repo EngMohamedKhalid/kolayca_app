@@ -13,7 +13,6 @@ class CustomHomeItem extends StatelessWidget {
     return Container(
       width: 200.w,
       height: 200.h,
-      padding: EdgeInsets.all(8.sp),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           color: AppColors.mainColor,
@@ -31,17 +30,19 @@ class CustomHomeItem extends StatelessWidget {
           Expanded(
             child: ImageWidget(
               imageUrl: image??"assets/images/img.png",
-              // width: double.infinity,
+               width: double.infinity,
               // height: 300.h,
-              // fit: BoxFit.fill,
+              fit: BoxFit.fill,
             ),
           ),
+          10.verticalSpace,
           TextWidget(
             title: name??"تحدث مع الاتراك",
             titleSize: 20.sp,
             titleColor: AppColors.white,
             titleFontWeight: FontWeight.w500,
           ),
+          5.verticalSpace
         ],
       ),
 

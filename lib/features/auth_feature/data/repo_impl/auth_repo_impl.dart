@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:dartz/dartz.dart';
 import '../../../../app/error/failures.dart';
 import '../../../../app/network/network_info.dart';
@@ -53,6 +54,25 @@ class AuthRepoImpl extends AuthRepo{
   Future<Either<Failure, String>> verifyOtp(Map<String, String> map) async {
     return await RepoImplCallHandler<String>(networkInfo)(() async {
       final result= await authRemoteDataSource.verifyOtp(map);
+      return  result;
+    });
+  }
+
+  @override
+  Future<Either<Failure, UserModel>> getProfile()async {
+    return await RepoImplCallHandler<UserModel>(networkInfo)(() async {
+      final result= await authRemoteDataSource.getProfile();
+      await getIt<CacheService>().saveUserData(encodedUser: json.encode(result.toJson()));
+      return  result;
+    });
+  }
+
+  @override
+  Future<Either<Failure, AllUserModel>> updateProfile(Map<String, String> map, Map<String, File> files) async {
+    return await RepoImplCallHandler<AllUserModel>(networkInfo)(() async {
+      final result= await authRemoteDataSource.updateProfile(map, files);
+      await getIt<CacheService>().setUserToken(token: result.accessToken??"null");
+      await getIt<CacheService>().saveUserData(encodedUser: json.encode(result.toJson()));
       return  result;
     });
   }

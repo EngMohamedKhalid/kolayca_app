@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kolayca_app/features/auth_feature/presentation/presentation_logic_holder/auth_cubit.dart';
 
 import '../../../../app/services/cache_service.dart';
 import '../../../../app/utils/app_assets.dart';
@@ -25,7 +26,7 @@ class CustomLoginAndVerifiedWidget extends StatelessWidget {
             Row(
               children: [
                 TextWidget(
-                  title:"Eng Mohamed Khalid",
+                  title:getIt<CacheService>().getUserData()?.name??AuthCubit.get().editEmailController.text,
                   titleColor: AppColors.mainColor,
                   titleSize: 30.sp,
                   titleFontWeight: FontWeight.w600,
@@ -42,7 +43,7 @@ class CustomLoginAndVerifiedWidget extends StatelessWidget {
             Row(
               children: [
                 TextWidget(
-                  title:"${getIt<CacheService>().getUserData()?.email??"2"}${"01016738840"}",
+                  title:getIt<CacheService>().getUserData()?.email??AuthCubit.get().editEmailController.text,
                   titleColor: AppColors.mainColor,
                   titleSize: 22.sp,
                   titleFontWeight: FontWeight.w500,

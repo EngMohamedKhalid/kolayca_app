@@ -5,6 +5,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kolayca_app/features/BNB_feature/presentation/screens/BNB_screen.dart';
 import 'package:kolayca_app/features/auth_feature/presentation/screens/login_screen.dart';
+import 'package:kolayca_app/features/home_feature/presentation/PLH/home_cubit.dart';
 import 'package:kolayca_app/features/home_feature/presentation/screens/about_us_screen.dart';
 import 'package:kolayca_app/features/home_feature/presentation/screens/home_screen.dart';
 import 'package:kolayca_app/features/home_feature/presentation/screens/request_live_translator_screen.dart';
@@ -43,6 +44,9 @@ void main() async{
         ),
         BlocProvider<AuthCubit>(
           create: (BuildContext context) => AuthCubit(),
+        ),
+        BlocProvider<HomeCubit>(
+          create: (BuildContext context) => HomeCubit(),
         ),
         BlocProvider<ThemeCubit>(
           create: (BuildContext context) => ThemeCubit(),
@@ -110,7 +114,7 @@ class MyApp extends StatelessWidget {
                         );
                       },
                     ),
-                    home: const LoginScreen()
+                    home: const BnbScreen()
                 );
               }
           ),

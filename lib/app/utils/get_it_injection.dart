@@ -1,6 +1,11 @@
 
 import 'package:data_connection_checker_nulls/data_connection_checker_nulls.dart';
 import 'package:get_it/get_it.dart';
+import 'package:kolayca_app/features/auth_feature/domain/use_cases/auth_usecases/get_profile_use_case.dart';
+import 'package:kolayca_app/features/home_feature/data/data_source/home_remote_data_source.dart';
+import 'package:kolayca_app/features/home_feature/data/repo_impl/home_repo_impl.dart';
+import 'package:kolayca_app/features/home_feature/domain/use_cases/get_home_categories_use_case.dart';
+import 'package:kolayca_app/features/home_feature/domain/use_cases/get_sliders_use_case.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../features/auth_feature/data/data_source/auth_remote_data_source.dart';
 import '../../features/auth_feature/data/repo_impl/auth_repo_impl.dart';
@@ -8,6 +13,8 @@ import '../../features/auth_feature/domain/repo/auth_repo.dart';
 import '../../features/auth_feature/domain/use_cases/auth_usecases/get-all_specializations_use_case.dart';
 import '../../features/auth_feature/domain/use_cases/auth_usecases/login_use_case.dart';
 import '../../features/auth_feature/domain/use_cases/auth_usecases/register_use_case.dart';
+import '../../features/auth_feature/domain/use_cases/auth_usecases/update_profile_usecase.dart';
+import '../../features/home_feature/domain/repo/home_repo.dart';
 import '../network/network_info.dart';
 import '../network/network_manager.dart';
 import '../services/cache_service.dart';
@@ -18,13 +25,13 @@ final getIt = GetIt.instance;
 Future<void> init() async {
   // data sources
   getIt.registerLazySingleton<AuthRemoteDataSource>(() => AuthRemoteDataSourceImpl(networkManager: getIt()));
-  // getIt.registerLazySingleton<ProfileRemoteDataSource>(() => ProfileRemoteDataSourceImpl(networkManager: getIt()));
+  getIt.registerLazySingleton<HomeRemoteDataSource>(() => HomeRemoteDataSourceImpl(networkManager: getIt()));
   // getIt.registerLazySingleton<CoursesRemoteDataSource>(() => CoursesRemoteDataSourceImpl(networkManager: getIt()),);
   // getIt.registerLazySingleton<EventsRemoteDataSource>(() => EventsRemoteDataSourceImpl(networkManager: getIt()),);
 
   //* Repository
   getIt.registerLazySingleton<AuthRepo>(() => AuthRepoImpl(authRemoteDataSource: getIt(), networkInfo: getIt()),);
-  // getIt.registerLazySingleton<ProfileRepo>(() => ProfileRepoImpl(profileRemoteDataSource: getIt(), networkInfo: getIt()),);
+  getIt.registerLazySingleton<HomeRepo>(() => HomeRepoImpl(homeRemoteDataSource: getIt(), networkInfo: getIt()),);
   // getIt.registerLazySingleton<CoursesRepo>(() => CourseRepoImpl( networkInfo: getIt(), coursesRemoteDataSource: getIt()),);
   // getIt.registerLazySingleton<EventsRepo>(() => EventsRepoImpl( networkInfo: getIt(), eventsRemoteDataSource: getIt()),);
   //
@@ -52,6 +59,8 @@ Future<void> init() async {
 void _authUseCases() {
    getIt.registerLazySingleton<LoginUseCase>(() => LoginUseCase(repository: getIt()));
    getIt.registerLazySingleton<RegisterUseCase>(() => RegisterUseCase(repository: getIt()));
+   getIt.registerLazySingleton<GetProfileUseCase>(() => GetProfileUseCase(repository: getIt()));
+   getIt.registerLazySingleton<UpdateProfileUseCase>(() => UpdateProfileUseCase(repository: getIt()));
 }
 
 
@@ -85,7 +94,8 @@ void _coursesUseCases() {
 }
 
 void _homeUseCase(){
-  // getIt.registerLazySingleton<GetHomeDataUseCase>(() => GetHomeDataUseCase(repository: getIt()));
+  getIt.registerLazySingleton<GetHomeCategoriesUseCase>(() => GetHomeCategoriesUseCase(repository: getIt()));
+  getIt.registerLazySingleton<GetSlidersUseCase>(() => GetSlidersUseCase(repository: getIt()));
 }
 void _searchUseCase(){
   // getIt.registerLazySingleton<SearchProductsUseCase>(() => SearchProductsUseCase(repository: getIt()));

@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:kolayca_app/features/auth_feature/domain/use_cases/auth_usecases/update_profile_usecase.dart';
 
 import '../../../../app/services/cache_service.dart';
 import '../../../../app/services/image_picker_service/image_picker_service.dart';
@@ -52,9 +53,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             statusBarIconBrightness: Brightness.dark
         ),
       ),
-      body: BlocBuilder<ProfileCubit, ProfileState>(
+      body: BlocBuilder<AuthCubit, AuthState>(
   builder: (context, state) {
-    var cubit = ProfileCubit.get();
+    var cubit = AuthCubit.get();
     return  state is ProfileLoading?
       const Center(child: Loading(),):
       Form(
@@ -183,8 +184,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               alignment: Alignment.center,
               child: CustomFormField(
                 hint: "name".tr(),
-                // controller: cu.loginEmailController,
-                keyboardType: TextInputType.emailAddress,
+                 controller: cubit.editNameController,
               ),
             ),
             32.verticalSpace,
@@ -192,7 +192,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               alignment: Alignment.center,
               child: CustomFormField(
                 hint: "email".tr(),
-                // controller: cu.loginEmailController,
+                controller: cubit.editEmailController,
                 keyboardType: TextInputType.emailAddress,
               ),
             ),
@@ -201,26 +201,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               alignment: Alignment.center,
               child: CustomFormField(
                 hint: "password".tr(),
-                // controller: cu.loginPasswordController,
-                suffixIcon: Icons.done,
-                // suffixIcon: cu.passObscure==false?Icons.visibility:Icons.visibility_off,
-                // obscure:cu.passObscure,
-                // errorText:  cu.errorMsg,
-                // onChange: (val) {
-                //   cu.errorMsg = null;
-                //   setState(() {});
-                // },
-                // iconPressed: () {
-                //   cu.changeVisible();
-                // },
-              ),
-            ),
-            32.verticalSpace,
-            Align(
-              alignment: Alignment.center,
-              child: CustomFormField(
-                hint: "password".tr(),
-                // controller: cu.loginPasswordController,
+                controller: cubit.editPassController,
                 suffixIcon: Icons.done,
                 // suffixIcon: cu.passObscure==false?Icons.visibility:Icons.visibility_off,
                 // obscure:cu.passObscure,
@@ -247,20 +228,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           onPressed: (){
             if(formKey.currentState!.validate() &&
                 ProfileCubit.get().passController.text==ProfileCubit.get().passConfirmController.text){
-              // ProfileCubit.get().updateUser(
-              //   UpdateUserUseCaseParams(
-              //     email: ProfileCubit.get().emailCont.text,
-              //     name:ProfileCubit.get().nameCont.text,
-              //     password: ProfileCubit.get().passController.text,
-              //     passwordConfirmation: ProfileCubit.get().passConfirmController.text,
-              //     phone: ProfileCubit.get().phoneCont.text,
-              //     specializationId: AuthCubit.get().specializationId.toString(),
-              //     countryName: AuthCubit.get().countryName,
-              //     countryCode: AuthCubit.get().countryCode,
-              //     dialCode: AuthCubit.get().dailCode,
-              //     image:userImage == null? null : File(userImage!.path),
-              //   ),
-              // );
+              AuthCubit.get().updateProfile(
+                params: UpdateProfileUseCaseParams(
+                  email: AuthCubit.get().editEmailController.text,
+                  name:AuthCubit.get().editNameController.text,
+                  newPassword: AuthCubit.get().editPassController.text,
+                  phone: null,
+                  image:userImage == null? null : File(userImage!.path),
+                ),
+              );
             }else{
               globalAlertDialogue(
                 "TheConfirmationError".tr(),
