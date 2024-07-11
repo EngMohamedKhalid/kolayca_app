@@ -5,6 +5,9 @@ import 'package:kolayca_app/features/auth_feature/domain/use_cases/auth_usecases
 import 'package:kolayca_app/features/home_feature/data/data_source/home_remote_data_source.dart';
 import 'package:kolayca_app/features/home_feature/data/repo_impl/home_repo_impl.dart';
 import 'package:kolayca_app/features/home_feature/domain/use_cases/get_home_categories_use_case.dart';
+import 'package:kolayca_app/features/home_feature/domain/use_cases/get_live_translator_use_case.dart';
+import 'package:kolayca_app/features/home_feature/domain/use_cases/get_package_use_case.dart';
+import 'package:kolayca_app/features/home_feature/domain/use_cases/get_recorded_lessons_use_case.dart';
 import 'package:kolayca_app/features/home_feature/domain/use_cases/get_sliders_use_case.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../features/auth_feature/data/data_source/auth_remote_data_source.dart';
@@ -96,6 +99,9 @@ void _coursesUseCases() {
 void _homeUseCase(){
   getIt.registerLazySingleton<GetHomeCategoriesUseCase>(() => GetHomeCategoriesUseCase(repository: getIt()));
   getIt.registerLazySingleton<GetSlidersUseCase>(() => GetSlidersUseCase(repository: getIt()));
+  getIt.registerLazySingleton<GetRecordedLessonsUseCase>(() => GetRecordedLessonsUseCase(repository: getIt()));
+  getIt.registerLazySingleton<GetPackageUseCase>(() => GetPackageUseCase(repository: getIt()));
+  getIt.registerLazySingleton<GetLiveTranslatorUseCase>(() => GetLiveTranslatorUseCase(repository: getIt()));
 }
 void _searchUseCase(){
   // getIt.registerLazySingleton<SearchProductsUseCase>(() => SearchProductsUseCase(repository: getIt()));

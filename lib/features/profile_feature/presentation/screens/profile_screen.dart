@@ -5,6 +5,8 @@ import 'package:kolayca_app/app/utils/app_colors.dart';
 import 'package:kolayca_app/app/utils/helper.dart';
 import 'package:kolayca_app/app/widgets/default_app_bar_widget.dart';
 import 'package:kolayca_app/app/widgets/text_widget.dart';
+import 'package:kolayca_app/features/home_feature/presentation/screens/recorded_lesson_screen.dart';
+import 'package:kolayca_app/features/home_feature/presentation/screens/subscribe_package_screen.dart';
 import 'package:kolayca_app/features/profile_feature/presentation/screens/lang_screen.dart';
 import 'package:kolayca_app/features/profile_feature/presentation/screens/requests_screen.dart';
 
@@ -77,6 +79,52 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   const Spacer(),
                   const CustomNotificationCountItem(count: "10",)
+                ],
+              ),
+            ),
+          ),
+          16.verticalSpace,
+          InkWell(
+            onTap: () => navigateTo(const RecordedLessonScreen()),
+            child: Container(
+              padding: EdgeInsets.all(12.sp),
+              decoration: BoxDecoration(
+                color: AppColors.white,
+                borderRadius: BorderRadius.circular(16.r),
+                boxShadow: [BoxShadow(color: Colors.grey.withOpacity(.4), spreadRadius: 5, blurRadius: 7, offset: const Offset(0, 3))],
+              ),
+              child: Row(
+                children: [
+                  16.horizontalSpace,
+                  TextWidget(
+                    title: "recordedLessons".tr(),
+                    titleColor: AppColors.mainColor,
+                    titleSize: 36.sp,
+                    titleFontWeight: FontWeight.w400,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          16.verticalSpace,
+          InkWell(
+            onTap: () => navigateTo(const SubscribePackageScreen()),
+            child: Container(
+              padding: EdgeInsets.all(12.sp),
+              decoration: BoxDecoration(
+                color: AppColors.white,
+                borderRadius: BorderRadius.circular(16.r),
+                boxShadow: [BoxShadow(color: Colors.grey.withOpacity(.4), spreadRadius: 5, blurRadius: 7, offset: const Offset(0, 3))],
+              ),
+              child: Row(
+                children: [
+                  16.horizontalSpace,
+                  TextWidget(
+                    title: "subscribe".tr(),
+                    titleColor: AppColors.mainColor,
+                    titleSize: 36.sp,
+                    titleFontWeight: FontWeight.w400,
+                  ),
                 ],
               ),
             ),

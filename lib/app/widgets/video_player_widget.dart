@@ -15,7 +15,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   void initState() {
     super.initState();
     _controller = YoutubePlayerController(
-        initialVideoId: YoutubePlayer.convertUrlToId(widget.url??"https://youtu.be/k-59Uyp0Ojc?feature=shared")??"iLnmTe5Q2Qw",
+        initialVideoId: YoutubePlayer.convertUrlToId(widget.url??"")??"iLnmTe5Q2Qw",
         flags:const  YoutubePlayerFlags(
             mute: false,
             autoPlay: false,
